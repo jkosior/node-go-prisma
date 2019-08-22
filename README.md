@@ -6,6 +6,8 @@
 
 ## startup for bash users
 
+[To top](#node-go-prisma)
+
 * to build
 
   ```bash
@@ -43,6 +45,8 @@
   ```
 
 ## startup for make users
+
+[To top](#node-go-prisma)
 
 * to build
 
