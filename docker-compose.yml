@@ -54,7 +54,8 @@ services:
     environment:
       WAIT_HOSTS: prisma:4466
     volumes:
-      - ./generated:/app/generated:rw
+      - ./mailing:/app/mailing:rw
+      - ./server:/app/server:rw
 
 
 volumes:

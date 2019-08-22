@@ -4,7 +4,7 @@ datamodel: datamodel.prisma
 
 generate:
   - generator: javascript-client
-    output: ./generated/prisma-client-js/
+    output: ./mailing/prisma-client
 
   - generator: go-client
-    output: ./generated/prisma-client-go/
+    output: ./server/prisma-client
