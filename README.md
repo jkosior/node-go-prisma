@@ -11,19 +11,19 @@
 * to build
 
   ```bash
-    ./setup [-b | --build] [-C contaier name]
+    ./setup [-b | --build] [-C container name]
   ```
 
 * to start
 
   ```bash
-    ./setup [-s | --start] [-C contaier name]
+    ./setup [-s | --start] [-C container name]
   ```
 
 * to start dev (with logs)
 
   ```bash
-    ./setup [-d | --dev] [-C contaier name]
+    ./setup [-d | --dev] [-C container name]
   ```
 
 * to stop
