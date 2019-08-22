@@ -1,10 +1,28 @@
 # node-go-prisma
 
-1. [Startup for bash users](#startup-for-bash-users)
+1. [Before startup](#before-startup)
 
-2. [Startup for make users](#startup-for-make-users)
+2. [Variables](#variables)
 
-## startup for bash users
+3. [Startup for bash users](#startup-for-bash-users)
+
+4. [Startup for make users](#startup-for-make-users)
+
+## Before startup
+
+```bash
+  cp .env.sample .env
+```
+
+Then fill in all needed variables.
+
+## Variables
+
+* `PRISMA_PORT` - port used for communicatio with prisma
+* `POSTGRES_USER` - postgres username
+* `POSTGRES_PASSWORD` - postgres password
+
+## Startup for bash users
 
 [To top](#node-go-prisma)
 
@@ -44,7 +62,7 @@
     ./setup [-h | --help]
   ```
 
-## startup for make users
+## Startup for make users
 
 [To top](#node-go-prisma)
 
