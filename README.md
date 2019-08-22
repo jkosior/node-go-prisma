@@ -16,15 +16,17 @@
 
 Then fill in all needed variables.
 
+[To top](#node-go-prisma)
+
 ## Variables
 
 * `PRISMA_PORT` - port used for communicatio with prisma
 * `POSTGRES_USER` - postgres username
 * `POSTGRES_PASSWORD` - postgres password
 
-## Startup for bash users
-
 [To top](#node-go-prisma)
+
+## Startup for bash users
 
 * to build
 
@@ -62,9 +64,9 @@ Then fill in all needed variables.
     ./setup [-h | --help]
   ```
 
-## Startup for make users
-
 [To top](#node-go-prisma)
+
+## Startup for make users
 
 * to build
 
@@ -95,3 +97,5 @@ Then fill in all needed variables.
   ```bash
     make prune
   ```
+
+[To top](#node-go-prisma)
