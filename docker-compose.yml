@@ -1,11 +1,24 @@
 version: '3'
+
+networks:
+    main_network:
+        driver: bridge
+    sub_network:
+        driver: bridge
+
 services:
 
   prisma:
     image: prismagraphql/prisma:1.34
+    container_name: prisma
     restart: always
+    networks:
+      - main_network
+      - sub_network
+    depends_on:
+      - postgres
     ports:
-      - "$PRISMA_PORT:$PRISMA_PORT"
+      - "4466:4466"
     environment:
       PRISMA_CONFIG: |
         port: 4466
@@ -19,12 +32,30 @@ services:
 
   postgres:
     image: postgres:10.3
+    container_name: postgres
     restart: always
+    networks:
+      - sub_network
     environment:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
       - postgres:/var/lib/postgresql/data
+
+  prisma-deploy:
+    build:
+      context: .
+      dockerfile: Dockerfile-prisma-deploy
+    container_name: prisma-deploy
+    depends_on:
+      - prisma
+    networks:
+      - main_network
+    environment:
+      WAIT_HOSTS: prisma:4466
+    volumes:
+      - ./generated:/app/generated:rw
+
 
 volumes:
   postgres: ~

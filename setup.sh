@@ -6,6 +6,7 @@ command=""
 exe=false
 help=false
 invalid=false
+prune=false
 
 help_message="
 $(basename "$0") [-bcdehiprsS] [-C n] program to startup docker compose\n\n
@@ -49,9 +50,10 @@ while (( "$#" )); do
       shift;;
 
     -e | --enter)
+      base_command="docker"
       command="exec -it"
       exe=true
-      break;;
+      shift;;
 
     -h | --help)
       help=true
@@ -62,8 +64,7 @@ while (( "$#" )); do
       break;;
 
     -p | --prune)
-      base_command="docker container prune -f \
-        && docker network prune -f"
+      prune=true
       break;;
 
     -r | --rebuild)
@@ -90,10 +91,18 @@ if $exe; then
   command="$command /bin/bash"
 fi
 
-if $help; then
-  echo -e $help_message
-elif $invalid; then
-  echo -e "Invalid command\n $help_message"
-else
-  $base_command $command
-fi
+case true in
+
+  $help)
+  echo -e $help_message;;
+
+  $invalid)
+  echo -e "Invalid command\n $help_message";;
+
+  $prune)
+  docker container prune -f && docker network prune -f;;
+
+  *)
+  $base_command $command;;
+
+esac

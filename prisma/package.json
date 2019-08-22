@@ -1,0 +1,14 @@
+{
+  "name": "prisma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "prisma": "^1.34.6"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "generate": "node ./node_modules/prisma/dist/index.js generate",
+    "deploy": "node ./node_modules/prisma/dist/index.js deploy"
+  }
+}
