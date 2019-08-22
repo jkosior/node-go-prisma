@@ -5,21 +5,24 @@ command=""
 
 exe=false
 help=false
+invalid=false
 
 help_message="
-$(basename "$0") [-bdheprsS] [-c n] program to startup docker compose\n\n
+$(basename "$0") [-bcdehiprsS] [-C n] program to startup docker compose\n\n
 
 where:\n
   -b | --build builds all or chosen container[s]\n
+  -c | --config shows compose config\n
   -d | --dev starts all or chosen container[s] with logs\n
-  -h | --help shows this help message\n
   -e | --enter opens shell of chosen container[s]\n
+  -h | --help shows this help message\n
+  -i | --info shows running docker images
   -p | --prune prunes unused containers and network\n
   -r | --rebuild rebuilds all or chosen container[s]\n
   -s | --start starts all or chosen container[s]\n
   -S | --stop stops compose\n\n
 
-  -c | --container [n] inserts chosen container[s] into command\n
+  -C | --container [n] inserts chosen container[s] into command\n
 "
 
 while (( "$#" )); do
@@ -32,7 +35,11 @@ while (( "$#" )); do
       command="build"
       shift;;
 
-    -c | --container)
+    -c | --config)
+      command="config"
+      break;;
+
+    -C | --container)
       shift
       command="$command $@"
       break;;
@@ -41,13 +48,17 @@ while (( "$#" )); do
       command="up"
       shift;;
 
+    -e | --enter)
+      command="exec -it"
+      exe=true
+      break;;
+
     -h | --help)
       help=true
       break;;
 
-    -e | --enter)
-      command="exec -it"
-      exe=true
+    -i | --info)
+      base_command="docker ps"
       break;;
 
     -p | --prune)
@@ -67,6 +78,10 @@ while (( "$#" )); do
       command="down"
       break;;
 
+    -* | --*)
+      invalid=true
+      break;;
+
   esac
 
 done
@@ -77,7 +92,8 @@ fi
 
 if $help; then
   echo -e $help_message
+elif $invalid; then
+  echo -e "Invalid command\n $help_message"
 else
-  $base_command $command \
-    && $(docker ps)
+  $base_command $command
 fi
