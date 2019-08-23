@@ -2,5 +2,9 @@
   "name": "mailing",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.3.0",
+    "rxjs": "^6.5.2"
+  }
 }
